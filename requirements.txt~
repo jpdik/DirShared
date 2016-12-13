@@ -17,7 +17,6 @@ lxml==3.3.3
 oauthlib==0.6.1
 pyOpenSSL==0.13
 pycrypto==2.6.1
-pycups==1.9.66
 pyserial==2.6
 pysmbc==1.0.14.1
 pyxdg==0.25
