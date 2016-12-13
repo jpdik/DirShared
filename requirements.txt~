@@ -14,7 +14,6 @@ httplib2==0.8
 itsdangerous==0.24
 lockfile==0.8
 lxml==3.3.3
-notify2==0.3
 oauthlib==0.6.1
 oneconf==0.3.7.14.04.1
 pexpect==3.1
