@@ -25,5 +25,3 @@ urllib3==1.18.1
 virtualenv==15.1.0
 wheel==0.24.0
 wsgiref==0.1.2
-xdiagnose==3.6.3build2
-zope.interface==4.0.5
