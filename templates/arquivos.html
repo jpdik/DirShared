@@ -1,5 +1,7 @@
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="estilo.css" />
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<title>Dir Shared ({{ nome }})</title>
 	</head>
 <body>
@@ -14,12 +16,12 @@
 
 	<form method="post" action={{ nome }}/download>
 		<br /><br />
-		<section id="arquivos">
-		{% for i in arquivos %}
-		  	<a href="{{ nome }}/{{ i['path'].split('/')[-1] }}">{{ i['path'].split('/')[-1] }}</a>
-		  	<br />
-		{% endfor %}
-		</section>
+		<ul id="arquivos">
+		<!--{% for i in arquivos %}-->
+		  	<li><a href="{{ nome }}/{{ i['path'].split('/')[-1] }}">{{ i['path'].split('/')[-1] }}</a></li>
+		  	<li><a href="{{ nome }}/{{ i['path'].split('/')[-1] }}">{{ i['path'].split('/')[-1] }}</a></li>
+		<!--{% endfor %}-->
+		</ul>
 		<br /><br />
 	</form>
 
