@@ -38,7 +38,7 @@ def exibirArquivo(nome_diretorio):
     template = env.get_template('arquivos.html')
     return template.render(arquivos=info['contents'],nome=nome_diretorio)
 
-@app.route('/<nome_diretorio/obter', methods=['GET'])
+@app.route('/<nome_diretorio>/obter', methods=['GET'])
 def obterArquivos(nome_diretorio):
   if request.method == 'GET':
     try:
