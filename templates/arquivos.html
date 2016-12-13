@@ -17,10 +17,9 @@
 	<form method="post" action={{ nome }}/download>
 		<br /><br />
 		<ul id="arquivos">
-		<!--{% for i in arquivos %}-->
+		{% for i in arquivos %}
 		  	<li><a href="{{ nome }}/{{ i['path'].split('/')[-1] }}">{{ i['path'].split('/')[-1] }}</a></li>
-		  	<li><a href="{{ nome }}/{{ i['path'].split('/')[-1] }}">{{ i['path'].split('/')[-1] }}</a></li>
-		<!--{% endfor %}-->
+		{% endfor %}
 		</ul>
 		<br /><br />
 	</form>
