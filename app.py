@@ -27,25 +27,25 @@ def api():
     return json.dumps({'erro': 'Método inválido'})
 
 
-@app.route('/<nome_arquivo>', methods=['GET'])
-def exibirArquivo(nome_arquivo):
+@app.route('/<nome_diretorio>', methods=['GET'])
+def exibirArquivo(nome_diretorio):
   if request.method == 'GET':
     try:
-      folder_metadata = client.file_create_folder('/%s' % nome_arquivo)
-      info = client.metadata('/%s' % nome_arquivo)
+      folder_metadata = client.file_create_folder('/%s' % nome_diretorio)
+      info = client.metadata('/%s' % nome_diretorio)
     except dropbox.rest.ErrorResponse as err:
-      info = client.metadata('/%s' % nome_arquivo)
+      info = client.metadata('/%s' % nome_diretorio)
     template = env.get_template('arquivos.html')
-    return template.render(arquivos=info['contents'],nome=nome_arquivo)
+    return template.render(arquivos=info['contents'],nome=nome_diretorio)
 
-@app.route('/<nome_arquivo>/obter', methods=['GET'])
-def obterArquivos(nome_arquivo):
+@app.route('/<nome_diretorio/obter', methods=['GET'])
+def obterArquivos(nome_diretorio):
   if request.method == 'GET':
     try:
-      folder_metadata = client.file_create_folder('/%s' % nome_arquivo)
-      info = client.metadata('/%s' % nome_arquivo)
+      folder_metadata = client.file_create_folder('/%s' % nome_diretorio)
+      info = client.metadata('/%s' % nome_diretorio)
     except dropbox.rest.ErrorResponse as err:
-      info = client.metadata('/%s' % nome_arquivo)
+      info = client.metadata('/%s' % nome_diretorio)
     
     arquivos = []
     caminhos = []
@@ -54,8 +54,8 @@ def obterArquivos(nome_arquivo):
       caminhos.append(i['path']);
     return json.dumps({'arquivos' : arquivos, 'caminhos' : caminhos})
 
-@app.route('/<nome_arquivo>/upload', methods=['GET', 'POST'])
-def uploadArquivo(nome_arquivo):
+@app.route('/<nome_diretorio>/upload', methods=['GET', 'POST'])
+def uploadArquivo(nome_diretorio):
   template = env.get_template('erro.html')
   carregado = env.get_template('uploaded.html')
   if 'file' not in request.files:
@@ -74,29 +74,29 @@ def uploadArquivo(nome_arquivo):
       return json.dumps({'msg': 'Nenhum arquivo pode ser maior que 10 MB'})
       #return template.render(erro='Nenhum arquivo pode ser maior que 10 MB', nome=nome_arquivo, url = URL + nome_arquivo)
 
-  info = client.metadata('/%s' % nome_arquivo)
+  info = client.metadata('/%s' % nome_diretorio)
   if len(uploaded_files) + len(info['contents']) > 15:
     return json.dumps({'msg': 'Limite de 15 arquivos por dir.'})
 
   if file:
     for i in uploaded_files:
-      response = client.put_file(nome_arquivo + "/" + i.filename, i)
+      response = client.put_file(nome_diretorio + "/" + i.filename, i)
     return json.dumps({'msg': str(len(uploaded_files))+' arquivos foram carregados.'})
     #return carregado.render(num_arquivos=len(uploaded_files), arquivos=uploaded_files, nome=nome_arquivo, url = URL + nome_arquivo)
 
-@app.route('/<nome_arquivo>/apagar', methods=['DELETE'])
-def apagarArquivos(nome_arquivo):
+@app.route('/<nome_diretorio>/apagar', methods=['DELETE'])
+def apagarArquivos(nome_diretorio):
   apagado = env.get_template('apagado.html')
-  info = client.metadata('/%s' % nome_arquivo)
+  info = client.metadata('/%s' % nome_diretorio)
   for i in info['contents']:
     client.file_delete(i['path'])
   return json.dumps({'msg': str(len(info['contents']))+' arquivos foram apagados.'}) 
 
-@app.route('/<nome_arquivo>/<nome>', methods=['GET'])
-def downloadArquivo(nome_arquivo, nome):
+@app.route('/<nome_diretorio>/<nome>', methods=['GET'])
+def downloadArquivo(nome_diretorio, nome):
   if request.method == 'GET':
     try:
-      f, metadata = client.get_file_and_metadata(nome_arquivo+"/"+nome)
+      f, metadata = client.get_file_and_metadata(nome_diretorio+"/"+nome)
       csv = f.read()
       return Response(
           csv,
@@ -105,7 +105,7 @@ def downloadArquivo(nome_arquivo, nome):
                    "attachment; filename="+nome})
     except dropbox.rest.ErrorResponse as err:
       template = env.get_template('erro.html')
-      return template.render(erro='O arquivo foi movido ou removido.',nome=nome_arquivo)
+      return template.render(erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
 
 
 if __name__ == "__main__":
