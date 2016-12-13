@@ -64,7 +64,7 @@ $(document).ready(function(){
 			      	var resp = JSON.parse(e);
 			       	$('#arquivos').html('');
 				   	for(var i in resp['arquivos'])
-				   		$('#arquivos').append('<li><a href=\"{{ nome }}/'+resp['arquivos'][i]+'\">'+resp['arquivos'][i]+'</a></li>');
+				   		$('#arquivos').append('<li><a href=\"'+resp['caminhos'][i]+'\">'+resp['arquivos'][i]+'</a></li>');
 				},
 				error: function (e) {
 				    alert('Ocorreu um erro ao carregar os arquivos. A pagina será recarregada.');

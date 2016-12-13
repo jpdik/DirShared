@@ -13,10 +13,16 @@ TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
 
 URL = 'http://127.0.0.1:5000/'
 
+NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'mp4', 'avi', 'mpg', 'mpeg', 'ogg'])
+
 client = dropbox.client.DropboxClient(TOKEN) 
 
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
+
+def arquivo_negado(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in NOT_ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def api():
@@ -56,8 +62,6 @@ def obterArquivos(nome_diretorio):
 
 @app.route('/<nome_diretorio>/upload', methods=['GET', 'POST'])
 def uploadArquivo(nome_diretorio):
-  template = env.get_template('erro.html')
-  carregado = env.get_template('uploaded.html')
   if 'file' not in request.files:
     return json.dumps({'msg': 'Nenhum arquivo encontrado'})
     #return template.render(erro='Nenhum arquivo encontrado', nome=nome_arquivo, url = URL + nome_arquivo)
@@ -72,7 +76,11 @@ def uploadArquivo(nome_diretorio):
   for i in uploaded_files:
     if len(i.read()) > 10 * 1024 * 1024:
       return json.dumps({'msg': 'Nenhum arquivo pode ser maior que 10 MB'})
-      #return template.render(erro='Nenhum arquivo pode ser maior que 10 MB', nome=nome_arquivo, url = URL + nome_arquivo)
+    if arquivo_negado(i.filename):
+      npermitidos = ""
+      for i in NOT_ALLOWED_EXTENSIONS:
+        npermitidos = npermitidos + " " + i;
+      return json.dumps({'msg': 'Não sao permitidos: ' + npermitidos})
 
   info = client.metadata('/%s' % nome_diretorio)
   if len(uploaded_files) + len(info['contents']) > 15:
@@ -86,7 +94,6 @@ def uploadArquivo(nome_diretorio):
 
 @app.route('/<nome_diretorio>/apagar', methods=['DELETE'])
 def apagarArquivos(nome_diretorio):
-  apagado = env.get_template('apagado.html')
   info = client.metadata('/%s' % nome_diretorio)
   for i in info['contents']:
     client.file_delete(i['path'])
