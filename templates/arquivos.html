@@ -42,7 +42,7 @@
 				}
 
 				$.ajax({
-			       url: 'http://127.0.0.1:5000/{{nome}}/upload',
+			       url: window.location.href+'/upload',
 			       //Ajax events
 			       success: function (e) {
 			       		var resp = JSON.parse(e);
@@ -67,7 +67,7 @@
     			$('#info2').html('<img src="http://www.cacp.org.br/wp-content/themes/portalcacp1.0/images/loading.gif"></img>');
 
 				$.ajax({
-			       url: 'http://127.0.0.1:5000/{{nome}}/apagar',
+			       url: window.location.href+'/apagar',
 			       //Ajax events
 			       success: function (e) {
 			       		var resp = JSON.parse(e);
@@ -89,7 +89,7 @@
 
 	    	function obterArquivos(){
 	    		$.ajax({
-			       url: 'http://127.0.0.1:5000/{{nome}}/obter',
+			       url: window.location.href+'/obter',
 			       //Ajax events
 			       success: function (e) {
 			       		var resp = JSON.parse(e);
