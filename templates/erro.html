@@ -7,7 +7,17 @@
 
 	<h2>Erro: {{ erro }} </h1>
 
-	<a href="http://127.0.0.1:5000/{{ nome }}">voltar</a>
+	<form onsubmit="return voltar()">
+		<button type="submit">Voltar</button>
 	</form>
+	<script type="text/javascript">
+		document.getElementById('campo').innerHTML = window.location.href;
+		function voltar() {
+			var valores = window.location.href.split('/');
+			var caminho = valores[0] + "//" + valores[2] + "/" + valores[3];
+			window.location.href = caminho;
+			return false;
+		}
+	</script>
 </body>
 </html>
