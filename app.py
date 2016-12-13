@@ -6,7 +6,6 @@ import dropbox
 
 from flask import Flask, Response
 from flask import request
-import Tkinter,tkFileDialog
 
 app = Flask(__name__)
 
