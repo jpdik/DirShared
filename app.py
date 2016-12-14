@@ -13,16 +13,32 @@ TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
 
 URL = 'http://127.0.0.1:5000/'
 
-NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'mp4', 'avi', 'mpg', 'mpeg', 'ogg'])
+#NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
 client = dropbox.client.DropboxClient(TOKEN) 
 
 from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 
-def arquivo_negado(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in NOT_ALLOWED_EXTENSIONS
+def get_size(fobj):
+    if fobj.content_length:
+        return fobj.content_length
+
+    try:
+        pos = fobj.tell()
+        fobj.seek(0, 2)  #seek to end
+        size = fobj.tell()
+        fobj.seek(pos)  # back to original position
+        return size
+    except (AttributeError, IOError):
+        pass
+
+    # in-memory file object that doesn't support seeking or tell
+    return 0  #assume small enough
+
+#def arquivo_negado(filename):
+#    return '.' in filename and \
+#           filename.rsplit('.', 1)[1] in NOT_ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def api():
@@ -74,13 +90,13 @@ def uploadArquivo(nome_diretorio):
     #return template.render(erro='Nenhum arquivo foi selecionado', nome=nome_arquivo, url = URL + nome_arquivo)
   
   for i in uploaded_files:
-    if len(i.read()) > 10 * 1024 * 1024:
+    if get_size(i) > 10 * 1024 * 1024:
       return json.dumps({'msg': 'Nenhum arquivo pode ser maior que 10 MB'})
-    if arquivo_negado(i.filename):
-      npermitidos = ""
-      for i in NOT_ALLOWED_EXTENSIONS:
-        npermitidos = npermitidos + " " + i;
-      return json.dumps({'msg': 'Não sao permitidos: ' + npermitidos})
+    #if arquivo_negado(i.filename):
+    # npermitidos = ""
+    #  for i in NOT_ALLOWED_EXTENSIONS:
+    #    npermitidos = npermitidos + " " + i;
+    #  return json.dumps({'msg': 'Não sao permitidos: ' + npermitidos})
 
   info = client.metadata('/%s' % nome_diretorio)
   if len(uploaded_files) + len(info['contents']) > 15:
@@ -116,4 +132,4 @@ def downloadArquivo(nome_diretorio, nome):
 
 
 if __name__ == "__main__":
-   app.run(debug=True)
+  app.run(debug=True)

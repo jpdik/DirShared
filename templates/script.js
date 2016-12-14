@@ -18,9 +18,13 @@ $(document).ready(function(){
 			       	$('#info').html(resp['msg']);
 			       	obterArquivos();
 			    },
+			    uploadProgress: function(event, position, total, percentComplete) {
+		            var percentVal = percentComplete + '%';
+		            bar.width(percentVal);
+		            percent.html(percentVal);
+		        },
 			    error: function (e) {
-			    	$('#info').html('error ' + e.message);
-			       	location.reload();
+			    	$('#info').html('Erro no upload.');
 			    },
 			// Form data
 			data: formData,
