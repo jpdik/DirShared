@@ -11,6 +11,8 @@ app = Flask(__name__)
 
 TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
 
+URL = 'http://127.0.0.1:5000/'
+
 #NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
 client = dropbox.client.DropboxClient(TOKEN) 
@@ -78,12 +80,14 @@ def obterArquivos(nome_diretorio):
 def uploadArquivo(nome_diretorio):
   if 'file' not in request.files:
     return json.dumps({'msg': 'Nenhum arquivo encontrado'})
+    #return template.render(erro='Nenhum arquivo encontrado', nome=nome_arquivo, url = URL + nome_arquivo)
   file = request.files['file']
   uploaded_files = request.files.getlist("file")
   # if user does not select file, browser also
   # submit a empty part without filename
   if file.filename == '':
     return json.dumps({'msg': 'Nenhum arquivo foi selecionado'})
+    #return template.render(erro='Nenhum arquivo foi selecionado', nome=nome_arquivo, url = URL + nome_arquivo)
   
   for i in uploaded_files:
     if get_size(i) > 10 * 1024 * 1024:
@@ -102,6 +106,7 @@ def uploadArquivo(nome_diretorio):
     for i in uploaded_files:
       response = client.put_file(nome_diretorio + "/" + i.filename, i)
     return json.dumps({'msg': str(len(uploaded_files))+' arquivos foram carregados.'})
+    #return carregado.render(num_arquivos=len(uploaded_files), arquivos=uploaded_files, nome=nome_arquivo, url = URL + nome_arquivo)
 
 @app.route('/<nome_diretorio>/apagar', methods=['DELETE'])
 def apagarArquivos(nome_diretorio):
