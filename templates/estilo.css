@@ -1,3 +1,13 @@
+h1 a{
+	text-decoration: none;
+	color: black;
+}
+
+h1 a:hover{
+	text-decoration: underline;
+	color: black;
+}
+
 ul#arquivos { 
 	margin: 0; /* retira o recuo para alguns browsers */ (*)
 	padding:0; /* retira o recuo para outros browsers */ (*)
