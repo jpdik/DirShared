@@ -50,13 +50,17 @@ def api():
 @app.route('/<nome_diretorio>', methods=['GET'])
 def exibirArquivo(nome_diretorio):
   if request.method == 'GET':
-    try:
-      folder_metadata = client.file_create_folder('/%s' % nome_diretorio)
-      info = client.metadata('/%s' % nome_diretorio)
-    except dropbox.rest.ErrorResponse as err:
-      info = client.metadata('/%s' % nome_diretorio)
-    template = env.get_template('arquivos.html')
-    return template.render(arquivos=info['contents'],nome=nome_diretorio)
+    if nome_diretorio.find('.') != -1:
+      template = env.get_template('erro.html')
+      return template.render(erro='O diretorio nao pode conter ponto.',nome=nome_diretorio)  
+    else:
+      try:
+        folder_metadata = client.file_create_folder('/%s' % nome_diretorio)
+        info = client.metadata('/%s' % nome_diretorio)
+      except dropbox.rest.ErrorResponse as err:
+        info = client.metadata('/%s' % nome_diretorio)
+      template = env.get_template('arquivos.html')
+      return template.render(arquivos=info['contents'],nome=nome_diretorio)
 
 @app.route('/<nome_diretorio>/obter', methods=['GET'])
 def obterArquivos(nome_diretorio):

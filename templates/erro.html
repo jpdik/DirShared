@@ -13,9 +13,7 @@
 	<script type="text/javascript">
 		document.getElementById('campo').innerHTML = window.location.href;
 		function voltar() {
-			var valores = window.location.href.split('/');
-			var caminho = valores[0] + "//" + valores[2] + "/" + valores[3];
-			window.location.href = caminho;
+			window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
 			return false;
 		}
 	</script>
