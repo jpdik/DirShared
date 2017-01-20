@@ -30,3 +30,12 @@ h1 {
 	line-height: 30px; 
 }
 
+footer {
+	position:absolute;
+	bottom: 2%;
+	padding-left: 80%;
+}
+
+footer a{
+	text-decoration: none;
+}

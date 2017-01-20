@@ -49,3 +49,13 @@ ul#arquivos li a:hover {
 border-left:10px solid #fff; 
 /* troca a cor da barrinha */ 
 }
+
+footer {
+	position:absolute;
+	bottom: 2%;
+	padding-left: 80%;
+}
+
+footer a{
+	text-decoration: none;
+}
