@@ -28,7 +28,7 @@
     world = document.getElementById( 'world' ),
     viewport = document.getElementById( 'viewport' ),
     
-    d = 1000,
+    d = 500,
     p = 400,
     worldXAngle = 0,
     worldYAngle = 0;
