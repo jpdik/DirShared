@@ -1,36 +1,41 @@
 <html lang="pt-BR">
 	<head>
+		<link rel="stylesheet" type="text/css" href="https://rawgit.com/jpdik/DirShared/master/templates/nuvens.css" />
 		<link rel="stylesheet" type="text/css" href="https://rawgit.com/jpdik/DirShared/master/templates/home.css" />
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<title>Dir Shared</title>
 	</head>
-	<body>
-		<h1>Dir Shared</h1>
-		
-		<div id="pathToGo">
-			<form onsubmit="return go()">
-				<text id ='campo'>http://127.0.0.1:5000/</text> <input type="text" id="path" name="path" autocapitalize="off"
-				autocorrect="off"/>
-				<button type="submit">Go!</button>
-			</form>
-		</div>
-		
-		<div id="intro">
-			<div id="texto">
-				Nao logue, somente use uma URL<br/>
-				Compartilhe arquivos diretamente<br/>
+	<div id="viewport" >
+		<div id="world" ></div>
+		<body>
+			<h1>Dir Shared</h1>
+			
+			<div id="pathToGo">
+				<form onsubmit="return go()">
+					<text id ='campo'>http://127.0.0.1:5000/</text> <input type="text" id="path" name="path" autocapitalize="off"
+					autocorrect="off"/>
+					<button type="submit">Go!</button>
+				</form>
 			</div>
-		</div>
-		
-		<script type="text/javascript">
-			document.getElementById('campo').innerHTML = window.location.href;
-		 	function go() {
-				window.location.href = window.location.href+document.getElementById('path').value;
-				return false;
-			}
-		</script>
-	</body>
+			
+			<div id="intro">
+				<div id="texto">
+					Nao logue, somente use uma URL<br/>
+					Compartilhe arquivos diretamente<br/>
+				</div>
+			</div>
+			
+			<script type="text/javascript">
+				document.getElementById('campo').innerHTML = window.location.href;
+			 	function go() {
+					window.location.href = window.location.href+document.getElementById('path').value;
+					return false;
+				}
+			</script>
+		</body>
+	</div>
 	<footer>
 		Criado por <a href="https://www.facebook.com/jpdik">João Paulo de Melo</a>
 	</footer>
+	<script src="https://rawgit.com/jpdik/DirShared/master/templates/nuvem.js"></script>
 </html>
