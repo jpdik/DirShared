@@ -10,8 +10,11 @@
 }
 
 #arquivos {
-width:500px; /* uma largura para o arquivos */ 
-/* uma borda em volta do arquivos */ 
+	width:500px; /* uma largura para o arquivos */ 
+}
+
+#posicao {
+	width:500px;
 }
 
 div#arquivos{
