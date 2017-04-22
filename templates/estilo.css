@@ -8,29 +8,13 @@ h1 a:hover{
 	color: black;
 }
 
-ul#arquivos { 
-	margin: 0; /* retira o recuo para alguns browsers */ (*)
-	padding:0; /* retira o recuo para outros browsers */ (*)
-}
-
-ul#arquivos li {
-	border-bottom:1px solid #000; 
-	/* coloca uma 
-	borda azul entre links */ 
-}
-
-ul#arquivos li a:link {
-	text-decoration: none; 
-	/* retira o sublinhado dos links */ 
-	font-family: Geneva, Arial, Helvetica, 
-	sans-serif; /* define o tipo de fonte */ 
-	font-size:14px; /* define o tamanho da fonte */ 
-	color:#000; /* define a cor da fonte */ 
-}
-
-ul#arquivos {
+#arquivos {
 width:500px; /* uma largura para o arquivos */ 
 /* uma borda em volta do arquivos */ 
+}
+
+div#arquivos{
+	margin:2em;
 }
 
 footer {
