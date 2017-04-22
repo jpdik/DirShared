@@ -6,7 +6,7 @@ $(document).ready(function(){
 		for(var i=0; i < $('#uploadFiles')[0].files.length; i++){
 			var file = $('#uploadFiles').get(0).files[i];
 			if(file.size > 10 * 1024 *1024)
-				return $('#info').html('<div class="alert alert-danger" role="alert">Nenhum arquivo pode ser maior que <strong>10 MB<strong>.</div>');
+				return $('#info').append('<div class="alert alert-danger" role="alert">Nenhum arquivo pode ser maior que <strong>10 MB<strong>.</div>');
 			formData.append('file', file);
 		}
 
@@ -15,7 +15,7 @@ $(document).ready(function(){
 			    //Ajax events
 			    success: function (e) {
 			    	var resp = JSON.parse(e);
-			       	$('#info').html('<div class="alert alert-success" role="alert" id="arquivos">'+resp['msg']+'</div>');
+			       	$('#info').append('<div class="alert alert-success" role="alert" id="arquivos">'+resp['msg']+'</div>');
 			       	obterArquivos();
 			    },
 			    uploadProgress: function(event, position, total, percentComplete) {

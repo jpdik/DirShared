@@ -7,29 +7,28 @@
 	</head>
 <body>
 	<h1 id='titulo'><a href="" id="link">Dir Shared</a> ({{ nome }})</h1>
-
-	<!--<form action={{ nome }}/upload method=post enctype=multipart/form-data>-->
       	
     <input id ="uploadFiles" type=file multiple name=file>
     <input id="upload" type=submit value=Upload>
     <br />
-    <p id="info"></p>
-    <!--</form>-->
+    <p id="info" />
 
-	<form method="post" action={{ nome }}/download>
-		<br />
-		<ul id="arquivos">
-			<div class="list-group">
-			{% for i in arquivos %}		
-				<button type="button" class="list-group-item" onclick="window.location.href='/{{ nome }}/{{ i['path'].split('/')[-1] }}'">
-			  		{{ i['path'].split('/')[-1] }}
-			  	<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-			 	</button>
-			{% endfor %}
-			</div>
-		</ul>
-		<br /><br />
-	</form>
+    <div>
+		<form method="post" action={{ nome }}/download>
+			<br />
+			<ul id="arquivos">
+				<div class="list-group">
+				{% for i in arquivos %}		
+					<button type="button" class="list-group-item" onclick="window.location.href='/{{ nome }}/{{ i['path'].split('/')[-1] }}'">
+				  		{{ i['path'].split('/')[-1] }}
+				  	<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+				 	</button>
+				{% endfor %}
+				</div>
+			</ul>
+			<br /><br />
+		</form>
+	</div>
 
 	<p id="info2"></p>
     <input id="apagarTudo" type=submit value="Apagar tudo">
