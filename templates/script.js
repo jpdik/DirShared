@@ -15,7 +15,7 @@ $(document).ready(function(){
 			    //Ajax events
 			    success: function (e) {
 			    	var resp = JSON.parse(e);
-			       	$('#info').html(resp['msg']);
+			       	$('#info').html('<div class="alert alert-success" role="alert" id info>'+resp['msg']+'</div>');
 			       	obterArquivos();
 			    },
 			    uploadProgress: function(event, position, total, percentComplete) {
