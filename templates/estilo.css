@@ -33,6 +33,10 @@ footer a{
 	text-decoration: none;
 }
 
+button.list-group-item{
+	margin-left: 6em;
+}
+
 button.list-group-item:hover {
     background-color: #cacaca;
     color: black;
