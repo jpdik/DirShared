@@ -11,17 +11,19 @@
 			<h1>Dir Shared</h1>
 			
 			<div id="pathToGo">
-				<div class="row">
-				  <div id ='campo'>http://127.0.0.1:5000/</div>
-				  <div class="col-lg-6">
-				    <div class="input-group"> 
-				      <input type="text" class="form-control" placeholder="Ir para local..." onclick="return go()">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="button">Go!</button>
-				      </span>
-				    </div><!-- /input-group -->
-				  </div><!-- /.col-lg-6 -->
-				</div><!-- /.row -->
+				<form onsubmit="return go()">
+					<div class="row">
+					  <div id ='campo'>http://127.0.0.1:5000/</div>
+					  <div class="col-lg-6">
+					    <div class="input-group"> 
+					      <input type="text" id="path" class="form-control" placeholder="Ir para local...">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" type="submit">Go!</button>
+					      </span>
+					    </div><!-- /input-group -->
+					  </div><!-- /.col-lg-6 -->
+					</div><!-- /.row -->
+				</form>
 			</div>
 			
 			<div id="intro">
