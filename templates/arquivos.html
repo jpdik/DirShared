@@ -12,11 +12,12 @@
       	
     <input id ="uploadFiles" type=file multiple name=file>
     <input id="upload" type=submit value=Upload>
+    <br />
     <p id="info"></p>
     <!--</form>-->
 
 	<form method="post" action={{ nome }}/download>
-		<br /><br />
+		<br />
 		<ul id="arquivos">
 			<div class="list-group">
 			{% for i in arquivos %}		
