@@ -1,9 +1,10 @@
-h1 a{
+#titulo, h1 a{
 	text-decoration: none;
 	color: black;
+	font-family: "Times New Roman", Times, serif;
 }
 
-h1 a:hover{
+#titulo a:hover, h1 a:hover{
 	text-decoration: underline;
 	color: black;
 }
