@@ -6,7 +6,7 @@ $(document).ready(function(){
 		for(var i=0; i < $('#uploadFiles')[0].files.length; i++){
 			var file = $('#uploadFiles').get(0).files[i];
 			if(file.size > 10 * 1024 *1024)
-				return $('#info').html('Nenhum arquivo pode ser maior que 10 MB');
+				return $('#info').append('Nenhum arquivo pode ser maior que 10 MB');
 			formData.append('file', file);
 		}
 
