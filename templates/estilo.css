@@ -1,12 +1,14 @@
 #titulo, h1 a{
 	text-decoration: none;
 	color: white;
+	text-shadow: black 0.1em 0.1em 0.2em;
 	font-family: "Times New Roman", Times, serif;
 }
 
 #titulo a:hover, h1 a:hover{
 	text-decoration: underline;
 	color: white;
+	text-shadow: black 0.1em 0.1em 0.2em;
 }
 
 #arquivos {
