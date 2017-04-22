@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
 
-#NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
+NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
 client = dropbox.client.DropboxClient(TOKEN) 
 
@@ -34,9 +34,9 @@ def get_size(fobj):
     # in-memory file object that doesn't support seeking or tell
     return 0  #assume small enough
 
-#def arquivo_negado(filename):
-#    return '.' in filename and \
-#           filename.rsplit('.', 1)[1] in NOT_ALLOWED_EXTENSIONS
+def arquivo_negado(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in NOT_ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def api():
@@ -92,11 +92,11 @@ def uploadArquivo(nome_diretorio):
   for i in uploaded_files:
     if get_size(i) > 10 * 1024 * 1024:
       return json.dumps({'msg': 'Nenhum arquivo pode ser maior que 10 MB'})
-    #if arquivo_negado(i.filename):
-    # npermitidos = ""
-    #  for i in NOT_ALLOWED_EXTENSIONS:
-    #    npermitidos = npermitidos + " " + i;
-    #  return json.dumps({'msg': 'Não sao permitidos: ' + npermitidos})
+    if arquivo_negado(i.filename):
+      npermitidos = ""
+      for i in NOT_ALLOWED_EXTENSIONS:
+        npermitidos = npermitidos + " " + i;
+      return json.dumps({'msg': 'Não são permitidos: ' + npermitidos})
 
   info = client.metadata('/%s' % nome_diretorio)
   if len(uploaded_files) + len(info['contents']) > 15:
