@@ -11,8 +11,6 @@ h1 a:hover{
 ul#arquivos { 
 	margin: 0; /* retira o recuo para alguns browsers */ (*)
 	padding:0; /* retira o recuo para outros browsers */ (*)
-	list-style-type: none; /* retira o marcador de listas*/ 
-	background-color: #9c79f1; /* cor do fundo */ 
 }
 
 ul#arquivos li {
@@ -30,34 +28,9 @@ ul#arquivos li a:link {
 	color:#000; /* define a cor da fonte */ 
 }
 
-ul#arquivos li a:hover {
-	background-color: #743ff5; /* cor do fundo */
-	color: #fff; /* cor da fonte */
-	display:block; (*)
-	cursor: crosshair; 
-}
-
 ul#arquivos {
 width:500px; /* uma largura para o arquivos */ 
-border:1px solid #003399; 
 /* uma borda em volta do arquivos */ 
-}
-
-ul#arquivos li a:link, ul#arquivos li a:visited {
-border-left:10px solid #9c79f1; /* uma barrinha a 
-esquerda dos links */ 
-padding-left:5px; /* espaçamento entre a 
-barrinha e o texto do link */ 
-}
-
-ul#arquivos li a:hover {
-border-left:10px solid #000; 
-/* troca a cor da barrinha */ 
-}
-
-ul#arquivos li a:hover {
-border-left:10px solid #fff; 
-/* troca a cor da barrinha */ 
 }
 
 footer {
@@ -68,4 +41,20 @@ footer {
 
 footer a{
 	text-decoration: none;
+}
+
+button.list-group-item:hover {
+    background-color: #cacaca;
+    color: black;
+}
+
+button.list-group-item span{
+    color: black;
+    float: right;
+    visibility:hidden;
+}
+
+button.list-group-item:hover span{
+    color: black;
+    visibility:visible;
 }
