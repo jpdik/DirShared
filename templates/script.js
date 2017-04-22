@@ -68,7 +68,8 @@ $(document).ready(function(){
 			      	var resp = JSON.parse(e);
 			       	$('#arquivos').html('');
 				   	for(var i in resp['arquivos'])
-				   		$('#arquivos').append('<li><a href=\"'+resp['caminhos'][i]+'\">'+resp['arquivos'][i]+'</a></li>');
+				   	$('#arquivos').append('<button type="button" class="list-group-item" onclick="window.location.href='+resp['caminhos'][i]+'">'+
+			  		resp['arquivos'][i]+'<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>');
 				},
 				error: function (e) {
 				    alert('Ocorreu um erro ao carregar os arquivos. A pagina será recarregada.');
