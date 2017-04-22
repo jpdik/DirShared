@@ -8,6 +8,12 @@ h1 {
 	text-align: center;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 60px;	
+
+	background: url("https://rawgit.com/jpdik/DirShared/master/img/background.jpeg") fixed no-repeat;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
 }
 
 #pathToGo {
