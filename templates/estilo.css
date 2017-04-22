@@ -14,7 +14,9 @@
 }
 
 #posicao {
-	width:500px;
+	margin-left: 2.5em;
+	margin-right: 10em;
+	margin-top: 2em;
 }
 
 div#arquivos{
