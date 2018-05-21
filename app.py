@@ -134,6 +134,8 @@ def downloadArquivo(nome_diretorio, nome):
 
 
 if __name__ == "__main__":
+  if os.path.isdir(PATH_DOWNLOAD) == False:
+    os.makedirs(PATH_DOWNLOAD)
   app.run(debug=True)
   app.logger.addHandler(logging.StreamHandler(sys.stdout))
   app.logger.setLevel(logging.ERROR)
