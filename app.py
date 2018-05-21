@@ -1,8 +1,10 @@
 # coding: utf-8
 import json
 import os
+import sys
 import requests
 import dropbox
+import logging
 
 from flask import Flask, Response, render_template
 from flask import request
@@ -133,3 +135,5 @@ def downloadArquivo(nome_diretorio, nome):
 
 if __name__ == "__main__":
   app.run(debug=True)
+  app.logger.addHandler(logging.StreamHandler(sys.stdout))
+  app.logger.setLevel(logging.ERROR)
