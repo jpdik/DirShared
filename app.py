@@ -114,9 +114,14 @@ def apagarArquivos(nome_diretorio):
     client.files_delete(i.path_display)
   return json.dumps({'msg': str(len(info.entries))+' arquivos foram apagados.'}) 
 
+def checarDiretorio():
+  if os.path.isdir(PATH_DOWNLOAD) == False:
+    os.makedirs(PATH_DOWNLOAD)
+
 @app.route('/<nome_diretorio>/<nome>', methods=['GET'])
 def downloadArquivo(nome_diretorio, nome):
   if request.method == 'GET':
+    checarDiretorio()
     try:
       folder = PATH_DOWNLOAD+nome_diretorio+"-"+nome
       f = client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
@@ -134,8 +139,6 @@ def downloadArquivo(nome_diretorio, nome):
 
 
 if __name__ == "__main__":
-  if os.path.isdir(PATH_DOWNLOAD) == False:
-    os.makedirs(PATH_DOWNLOAD)
   app.run(debug=True)
   app.logger.addHandler(logging.StreamHandler(sys.stdout))
   app.logger.setLevel(logging.ERROR)
