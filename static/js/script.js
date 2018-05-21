@@ -1,30 +1,37 @@
 $(document).ready(function(){
+
+	function ativarLoader(){
+		$('#load').removeClass('hide');
+	}
+
+	function desativarLoader(){
+		$('#load').addClass('hide');
+	}
+
 	$('#upload').click(function(){
-		$('#info').html('<img src="http://www.cacp.org.br/wp-content/themes/portalcacp1.0/images/loading.gif"></img>');
 
 		var formData = new FormData();
 		for(var i=0; i < $('#uploadFiles')[0].files.length; i++){
 			var file = $('#uploadFiles').get(0).files[i];
 			if(file.size > 10 * 1024 *1024)
-				return $('#info').html('<div class="alert alert-danger" role="alert" id="posicao">Nenhum arquivo pode ser maior que <strong>10 MB<strong>.</div>');
+				return M.toast({html: 'Nenhum arquivo pode ser maior que 10 MB.'});
 			formData.append('file', file);
 		}
+
+		ativarLoader();
 
 		$.ajax({
 			url: window.location.href+'/upload',
 			    //Ajax events
 			    success: function (e) {
 			    	var resp = JSON.parse(e);
-			       	$('#info').html('<div class="alert alert-success" role="alert" id="posicao">'+resp['msg']+'</div>');
+					M.toast({html: resp['msg']});
+					desativarLoader();
 			       	obterArquivos();
 			    },
-			    uploadProgress: function(event, position, total, percentComplete) {
-		            var percentVal = percentComplete + '%';
-		            bar.width(percentVal);
-		            percent.html(percentVal);
-		        },
 			    error: function (e) {
-			    	$('#info').html('<div class="alert alert-danger" role="alert" id="posicao"><strong>Erro</strong> no upload.</div>');
+					M.toast({html: 'Erro no upload.'});
+					desativarLoader();
 			    },
 			// Form data
 			data: formData,
@@ -37,19 +44,21 @@ $(document).ready(function(){
 	});
 
 	$('#apagarTudo').click(function(){
-		$('#info2').html('<img src="http://www.cacp.org.br/wp-content/themes/portalcacp1.0/images/loading.gif"></img>');
+		ativarLoader();
 
 		$.ajax({
 			url: window.location.href+'/apagar',
 				//Ajax events
 				success: function (e) {
 				    var resp = JSON.parse(e);
-				    $('#info2').html('<div class="alert alert-success" role="alert" id="posicao">'+resp['msg']+'</div>');
-				    	obterArquivos();
+					M.toast({html: resp['msg']});
+					desativarLoader();
+				    obterArquivos();
 				},
 				error: function (e) {
-				  	var resp = JSON.parse(e);
-				   	$('#info2').html('<div class="alert alert-danger" role="alert" id="posicao">error: '+resp['msg']+'</div>');
+					var resp = JSON.parse(e);
+					desativarLoader();
+					M.toast({html: resp['msg']});
 				   	location.reload();
 				},
 			type: 'DELETE',
@@ -68,8 +77,7 @@ $(document).ready(function(){
 			      	var resp = JSON.parse(e);
 			       	$('#arquivos').html('');
 				   	for(var i in resp['arquivos'])
-				   	$('#arquivos').append('<button type="button" class="list-group-item" onclick="window.location.href='+resp['caminhos'][i]+'">'+
-			  		resp['arquivos'][i]+'<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>');
+						$('#arquivos').append('<a href="'+resp['caminhos'][i]+'" class="collection-item">'+resp['arquivos'][i]+'</a>');
 				},
 				error: function (e) {
 				    alert('Ocorreu um erro ao carregar os arquivos. A pagina será recarregada.');

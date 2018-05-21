@@ -4,19 +4,18 @@ import os
 import requests
 import dropbox
 
-from flask import Flask, Response
+from flask import Flask, Response, render_template
 from flask import request
 
 app = Flask(__name__)
 
 TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
 
+PATH_DOWNLOAD = "data/"
+
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
-client = dropbox.client.DropboxClient(TOKEN) 
-
-from jinja2 import Environment, PackageLoader
-env = Environment(loader=PackageLoader(__name__, 'templates'))
+client = dropbox.Dropbox(TOKEN) 
 
 def get_size(fobj):
     if fobj.content_length:
@@ -41,8 +40,7 @@ def arquivo_negado(filename):
 @app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def api():
   if request.method == 'GET':
-    template = env.get_template('index.html')
-    return template.render()  
+    return render_template('index.html')  
   else:
     return json.dumps({'erro': 'Método inválido'})
 
@@ -51,32 +49,32 @@ def api():
 def exibirArquivo(nome_diretorio):
   if request.method == 'GET':
     if nome_diretorio.find('.') != -1:
-      template = env.get_template('erro.html')
-      return template.render(erro='O diretorio nao pode conter ponto.',nome=nome_diretorio)  
+      return render_template('erro.html', erro='O diretorio nao pode conter ponto.', nome=nome_diretorio)  
     else:
       try:
-        folder_metadata = client.file_create_folder('/%s' % nome_diretorio)
-        info = client.metadata('/%s' % nome_diretorio)
-      except dropbox.rest.ErrorResponse as err:
-        info = client.metadata('/%s' % nome_diretorio)
-      template = env.get_template('arquivos.html')
-      return template.render(arquivos=info['contents'],nome=nome_diretorio)
+        folder_metadata = client.files_create_folder('/%s' % nome_diretorio)
+        info = client.files_list_folder('/%s' % nome_diretorio).entries
+      except Exception as e:
+        info = client.files_list_folder('/%s' % nome_diretorio).entries
+    
+      return render_template('arquivos.html', arquivos=info, nome=nome_diretorio)
 
 @app.route('/<nome_diretorio>/obter', methods=['GET'])
 def obterArquivos(nome_diretorio):
   if request.method == 'GET':
     try:
-      folder_metadata = client.file_create_folder('/%s' % nome_diretorio)
-      info = client.metadata('/%s' % nome_diretorio)
-    except dropbox.rest.ErrorResponse as err:
-      info = client.metadata('/%s' % nome_diretorio)
+      folder_metadata = client.files_create_folder('/%s' % nome_diretorio)
+      info = client.files_list_folder('/%s' % nome_diretorio)
+    except Exception as err:
+      info = client.files_list_folder('/%s' % nome_diretorio)
     
     arquivos = []
     caminhos = []
-    for i in info['contents']:
-      arquivos.append(i['path'].split('/')[-1]);
-      caminhos.append(i['path']);
-    return json.dumps({'arquivos' : arquivos, 'caminhos' : caminhos})
+    for i in info.entries:
+      arquivos.append(i.name)
+      caminhos.append(i.path_display)
+
+    return json.dumps({'arquivos' : arquivos, 'caminhos': caminhos})
 
 @app.route('/<nome_diretorio>/upload', methods=['GET', 'POST'])
 def uploadArquivo(nome_diretorio):
@@ -98,36 +96,39 @@ def uploadArquivo(nome_diretorio):
         npermitidos = npermitidos + " " + i;
       return json.dumps({'msg': 'Não são permitidos: ' + npermitidos})
 
-  info = client.metadata('/%s' % nome_diretorio)
-  if len(uploaded_files) + len(info['contents']) > 15:
+  info = client.files_list_folder('/%s' % nome_diretorio).entries
+  if len(uploaded_files) + len(info) > 15:
     return json.dumps({'msg': 'Limite de 15 arquivos por dir.'})
 
   if file:
     for i in uploaded_files:
-      response = client.put_file(nome_diretorio + "/" + i.filename, i)
+      response = client.files_upload(i.read(), ("/" + nome_diretorio + "/" + i.filename))
     return json.dumps({'msg': str(len(uploaded_files))+' arquivos foram carregados.'})
 
 @app.route('/<nome_diretorio>/apagar', methods=['DELETE'])
 def apagarArquivos(nome_diretorio):
-  info = client.metadata('/%s' % nome_diretorio)
-  for i in info['contents']:
-    client.file_delete(i['path'])
-  return json.dumps({'msg': str(len(info['contents']))+' arquivos foram apagados.'}) 
+  info = client.files_list_folder('/%s' % nome_diretorio)
+  for i in info.entries:
+    client.files_delete(i.path_display)
+  return json.dumps({'msg': str(len(info.entries))+' arquivos foram apagados.'}) 
 
 @app.route('/<nome_diretorio>/<nome>', methods=['GET'])
 def downloadArquivo(nome_diretorio, nome):
   if request.method == 'GET':
     try:
-      f, metadata = client.get_file_and_metadata(nome_diretorio+"/"+nome)
-      csv = f.read()
+      folder = PATH_DOWNLOAD+nome_diretorio+"-"+nome
+      f = client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
+      with open(folder, 'rb') as arquivo:
+        csv = arquivo.read()
+      os.remove(folder)
       return Response(
           csv,
           mimetype="text/csv",
           headers={"Content-disposition":
                    "attachment; filename="+nome})
-    except dropbox.rest.ErrorResponse as err:
-      template = env.get_template('erro.html')
-      return template.render(erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
+    except Exception as err:
+      print(err)
+      return render_template('erro.html', erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
 
 
 if __name__ == "__main__":

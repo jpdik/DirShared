@@ -1,0 +1,21 @@
+#titulo, h1 a{
+	text-decoration: none;
+	color: white;
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+#titulo a:hover, h1 a:hover{
+	text-decoration: underline;
+	color: white;
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
