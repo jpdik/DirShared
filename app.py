@@ -15,11 +15,11 @@ from flask import request
 
 app = Flask(__name__)
 
-PATH_DOWNLOAD = os.getenv('PATH', 'null')
+PATH_DOWNLOAD = os.getenv('PATH')
 
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
-client = dropbox.Dropbox(os.getenv('TOKEN', 'null')) 
+client = dropbox.Dropbox(os.getenv('TOKEN')) 
 
 def get_size(fobj):
     if fobj.content_length:
