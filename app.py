@@ -129,7 +129,7 @@ def downloadArquivo(nome_diretorio, nome):
     checarDiretorio()
     try:
       folder = PATH_DOWNLOAD+nome_diretorio+"-"+nome
-      f = client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
+      client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
       with open(folder, 'rb') as arquivo:
         csv = arquivo.read()
       os.remove(folder)
