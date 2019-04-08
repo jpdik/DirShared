@@ -1,6 +1,10 @@
 # coding: utf-8
-import json
+
 import os
+if os.path.isfile('.env'):
+    import settings
+
+import json
 import sys
 import requests
 import dropbox
@@ -11,13 +15,11 @@ from flask import request
 
 app = Flask(__name__)
 
-TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
-
-PATH_DOWNLOAD = "data/"
+PATH_DOWNLOAD = os.getenv('PATH', None)
 
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
-client = dropbox.Dropbox(TOKEN) 
+client = dropbox.Dropbox(os.getenv('TOKEN', None)) 
 
 def get_size(fobj):
     if fobj.content_length:
