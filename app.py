@@ -19,7 +19,7 @@ PATH_DOWNLOAD = 'data/'
 
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
-client = dropbox.Dropbox(os.getenv('TOKEN')) 
+client = dropbox.Dropbox('clRIL4yey9UAAAAAAAAI6oh21lgtYyQk__aPKawa4zi7FaRiyGumVy_DiihNeh7n') 
 
 def get_size(fobj):
     if fobj.content_length:
