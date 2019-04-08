@@ -148,4 +148,12 @@ def downloadArquivo(nome_diretorio, nome):
 
 
 if __name__ == "__main__":
+  formatter = logging.Formatter( "%(asctime)s | %(pathname)s:%(lineno)d | %(funcName)s | %(levelname)s | %(message)s ")
+  handler = RotatingFileHandler('logs/SlackBotApp.log', maxBytes=10000, backupCount=5)
+  handler.setLevel(logging.DEBUG)
+  handler.setFormatter(formatter)
+
+  app.logger.addHandler(handler)
+  app.logger.addHandler(logging.StreamHandler(stream=sys.stdout))
+  app.logger.setLevel(logging.DEBUG)
   app.run(debug=True)
