@@ -1,6 +1,8 @@
 # coding: utf-8
 
 import os
+if os.path.isfile('.env'):
+  import settings
 
 import json
 import sys
@@ -8,7 +10,7 @@ import requests
 import dropbox
 import logging
 
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, url_for
 from flask import request
 
 app = Flask(__name__)
@@ -18,6 +20,19 @@ PATH_DOWNLOAD = os.getenv('DIR_DOWNLOAD')
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
 client = dropbox.Dropbox(os.getenv('TOKEN')) 
+
+@app.context_processor
+def override_url_for():
+    return dict(url_for=dated_url_for)
+
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(app.root_path,
+                                     endpoint, filename)
+            values['q'] = int(os.stat(file_path).st_mtime)
+    return url_for(endpoint, **values)
 
 def get_size(fobj):
     if fobj.content_length:

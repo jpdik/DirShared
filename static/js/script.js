@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	$('.modal').modal();
 
 	function ativarLoader(){
