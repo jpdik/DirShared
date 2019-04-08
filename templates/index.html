@@ -1,65 +1,72 @@
 <html lang="pt-BR">
+
 <head>
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo.css') }}" />
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Dir Shared</title>
 </head>
+
 <body class="blue">
 	<main>
-		<div class="row">
-			<section><br><br><br></section>
-			<section class="white-text center">
-				<h1 id='titulo'>Dir Shared</h1>
-			</section>
-			<section><br><br></section>
-			<div class="col s6 offset-s3">
-				<div class="card horizontal">
-					<div class="card-stacked">
-						<div class="card-content">
-							<form onsubmit="return go()">
-								<div class="row valign-wrapper">
-									<div class="col s4">
-										<p id="campo"></p>
-									</div>
-									<div class="col s4">
-										<input type="text" id="path" class="form-control" placeholder="Ir para local...">
-									</div>
-									<div class="col s4">
-										<span class="input-group-btn">
-											<button class="btn btn-default green" type="submit">Encontrar</button>
-										</span>
-									</div><!-- /.col-lg-6 -->
-								</div><!-- /.row -->
-							</form>
-						</div>
-						<div class="card-action center">
-							Nao logue, somente use uma URL<br/>
-							Compartilhe arquivos diretamente<br/>
+		<div class="container">
+			<div class="row">
+				<section><br><br><br></section>
+				<section class="white-text center">
+					<h1 id='titulo'>Dir Shared</h1>
+				</section>
+				<section><br><br></section>
+				<div class="col s12 m12 l12">
+					<div class="card horizontal">
+						<div class="card-stacked">
+							<div class="card-content">
+								<form onsubmit="return go()">
+									<div class="row">
+										<div class="col s12 m12 l6">
+											<input type="text" id="campo" disabled>
+										</div>
+										<div class="col s12 m12 l4">
+											<input type="text" id="path" class="form-control"
+												placeholder="Ir para local...">
+										</div>
+										<div class="col s12 m12 l2 center">
+											<span class="input-group-btn">
+												<button class="btn btn-default green" type="submit">Encontrar</button>
+											</span>
+										</div><!-- /.col-lg-6 -->
+									</div><!-- /.row -->
+								</form>
+							</div>
+							<div class="card-action center">
+								Nao logue, somente use uma URL<br />
+								Compartilhe arquivos diretamente<br />
+							</div>
 						</div>
 					</div>
 				</div>
+
+				<script type="text/javascript">
+					document.getElementById('campo').value = window.location.href;
+					function go() {
+						window.location.href = window.location.href + document.getElementById('path').value;
+						return false;
+					}
+				</script>
 			</div>
-			
-			<script type="text/javascript">
-				document.getElementById('campo').innerHTML = window.location.href;
-				function go() {
-					window.location.href = window.location.href+document.getElementById('path').value;
-					return false;
-				}
-			</script>
 		</div>
 	</main>
 </body>
 <footer class="page-footer blue">
 	<div class="footer-copyright green">
 		<div class="container">
-			© 2017 Copyright 
+			© 2017 Copyright
 			<a class="white-text right" href="https://www.facebook.com/jpdik">João Paulo de Melo</a>
 		</div>
 	</div>
 </footer>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
 </html>

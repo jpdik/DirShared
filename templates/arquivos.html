@@ -1,68 +1,94 @@
 <html>
+
 <head>
-	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icon.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Dir Shared ({{ nome }})</title>
 </head>
+
 <body class="blue">
 	<main>
-		<div class="row">
+		<div class="container">
 			<div class="row">
-				<section class="col s8 offset-s1 white-text">
-					<h1 id='titulo'><a href="/" id="link">Dir Shared</a> ({{ nome }})</h1>
-				</section>
-			</div>
-			
-			<div class="col s6 offset-s3">
-				<div class="card horizontal">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="row valign-wrapper">
-								<div class="col s8 offset-s2">
-									<div class="file-field input-field">
+				<div class="row">
+					<section class="s12 m12 l12 white-text">
+						<h1 id='titulo'><a href="/" id="link">Dir Shared</a> ({{ nome }})</h1>
+					</section>
+				</div>
+
+				<div class="s12 m12 l12">
+					<div class="card horizontal">
+						<div class="card-stacked">
+							<div class="card-content">
+								<div class="row valign-wrapper">
+									<div class="file-field input-field col s12 m12 l12">
 										<div class="btn btn-default green">
 											<span>File</span>
-											<input id ="uploadFiles" type="file" multiple name=file>
+											<input id="uploadFiles" type="file" multiple name=file>
 										</div>
 										<div class="file-path-wrapper">
-											<input class="file-path validate" type="text" placeholder="Upload one or more files">
+											<input class="file-path validate" type="text"
+												placeholder="Coloque um ou mais arquivos aqui.">
+										</div>
+									</div>
+
+
+								</div>
+								<div class="row">
+									<div class="col s12 m12 l12 center">
+										<button id="upload" class="btn btn-default green center"
+											type=submit>Upload</button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+										<div id="load" class="progress hide">
+											<div class="indeterminate"></div>
 										</div>
 									</div>
 								</div>
-								<div class="col s3 m3">
-									<button id="upload" class="btn btn-default green" type=submit>Upload</button>
+
+								<p>Arquivos:</p>
+								<div>
+									<form method="post" action={{ nome }}/download> <ul id="arquivos"
+										class="collection">
+										{% if arquivos %}
+											{% for i in arquivos %}
+											<li class="collection-item">
+												<div class="collection-item">
+													<a href="{{ i.path_display }}">{{ i.name }}</a>
+													<a id="apagar" href="#remove/{{i.name}}" class="secondary-content"><i
+															class="material-icons">delete</i></a>
+												</div>
+											</li>
+											{% endfor %}
+										{% else %}
+										<li class="collection-item">Nenhum arquivo aqui.</li>
+										{% endif %}
+										</ul>
+									</form>
 								</div>
-								
 							</div>
-							
-							<div class="row">
-								<div class="col s8 offset-s2">
-									<div id="load" class="progress hide">
-										<div class="indeterminate"></div>
-									</div>
-								</div>
+							<div class="card-action center">
+								<a class="btn btn-default green waves-effect waves-light btn modal-trigger" href="#modal1">Apagar tudo</a>
 							</div>
-							
-							<p>Arquivos:</p>
-							<div>
-								<form method="post" action={{ nome }}/download>
-									<br />
-									<div id="arquivos" class="collection">
-										{% for i in arquivos %}
-										<a href="{{ i.path_display }}" class="collection-item">{{ i.name }}</a>
-										{% endfor %}
-									</div>
-									<br /><br />
-								</form>
-							</div>
-						</div>
-						<div class="card-action">
-							<button id="apagarTudo" class="btn btn-default green">Apagar tudo</button>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<h4>Confirmação</h4>
+				<p>Tem certeza que deseja apagar tudo?</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" id="apagarTudo" class="modal-close waves-effect waves-green btn-flat">Sim</a>
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat">Não</a>
 			</div>
 		</div>
 	</main>
@@ -70,16 +96,16 @@
 <footer class="page-footer blue">
 	<div class="footer-copyright green">
 		<div class="container">
-			© 2017 Copyright 
+			© 2017 Copyright
 			<a class="white-text right" href="https://www.facebook.com/jpdik">João Paulo de Melo</a>
 		</div>
 	</div>
 </footer>
 <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"> </script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"> </script>
 <script type="text/javascript">
 	document.getElementById('link').href = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
 </script>
+
 </html>

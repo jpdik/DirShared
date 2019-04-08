@@ -54,9 +54,9 @@ def exibirArquivo(nome_diretorio):
       return render_template('erro.html', erro='O diretorio nao pode conter ponto.', nome=nome_diretorio)  
     else:
       try:
-        folder_metadata = client.files_create_folder('/%s' % nome_diretorio)
+        client.files_create_folder('/%s' % nome_diretorio)
         info = client.files_list_folder('/%s' % nome_diretorio).entries
-      except Exception as e:
+      except Exception:
         info = client.files_list_folder('/%s' % nome_diretorio).entries
     
       return render_template('arquivos.html', arquivos=info, nome=nome_diretorio)
@@ -65,9 +65,9 @@ def exibirArquivo(nome_diretorio):
 def obterArquivos(nome_diretorio):
   if request.method == 'GET':
     try:
-      folder_metadata = client.files_create_folder('/%s' % nome_diretorio)
+      client.files_create_folder('/%s' % nome_diretorio)
       info = client.files_list_folder('/%s' % nome_diretorio)
-    except Exception as err:
+    except Exception:
       info = client.files_list_folder('/%s' % nome_diretorio)
     
     arquivos = []
@@ -95,7 +95,7 @@ def uploadArquivo(nome_diretorio):
     if arquivo_negado(i.filename):
       npermitidos = ""
       for i in NOT_ALLOWED_EXTENSIONS:
-        npermitidos = npermitidos + " " + i;
+        npermitidos = npermitidos + " " + i
       return json.dumps({'msg': 'Não são permitidos: ' + npermitidos})
 
   info = client.files_list_folder('/%s' % nome_diretorio).entries
@@ -113,6 +113,11 @@ def apagarArquivos(nome_diretorio):
   for i in info.entries:
     client.files_delete(i.path_display)
   return json.dumps({'msg': str(len(info.entries))+' arquivos foram apagados.'}) 
+
+@app.route('/<nome_diretorio>/apagar/<arquivo>', methods=['DELETE'])
+def apagarArquivo(nome_diretorio, arquivo):
+  client.files_delete('/{}/{}'.format(nome_diretorio, arquivo))
+  return json.dumps({'msg': 'O arquivo "{}" foi apagado.'.format(arquivo)}) 
 
 def checarDiretorio():
   if os.path.isdir(PATH_DOWNLOAD) == False:
@@ -140,5 +145,3 @@ def downloadArquivo(nome_diretorio, nome):
 
 if __name__ == "__main__":
   app.run(debug=True)
-  app.logger.addHandler(logging.StreamHandler(sys.stdout))
-  app.logger.setLevel(logging.ERROR)
