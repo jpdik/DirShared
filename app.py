@@ -19,7 +19,7 @@ TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
 
 PATH_DOWNLOAD = "data/"
 
-NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
+NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg', 'mp4'])
 
 client = dropbox.Dropbox(TOKEN) 
 
