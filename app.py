@@ -15,13 +15,11 @@ from flask import request
 
 app = Flask(__name__)
 
-TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
+PATH_DOWNLOAD = os.getenv('PATH', 'null')
 
-PATH_DOWNLOAD = "data/"
+NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
-NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg', 'mp4'])
-
-client = dropbox.Dropbox(TOKEN) 
+client = dropbox.Dropbox(os.getenv('TOKEN', 'null')) 
 
 def get_size(fobj):
     if fobj.content_length:
@@ -148,7 +146,4 @@ def downloadArquivo(nome_diretorio, nome):
 
 
 if __name__ == "__main__":
-  gunicorn_logger = logging.getLogger('gunicorn.error')
-  app.logger.handlers = gunicorn_logger.handlers
-  app.logger.setLevel(gunicorn_logger.level)
   app.run(debug=True)
