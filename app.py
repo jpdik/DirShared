@@ -104,7 +104,7 @@ def uploadArquivo(nome_diretorio):
 
   if file:
     for i in uploaded_files:
-      response = client.files_upload(i.read(), ("/" + nome_diretorio + "/" + i.filename))
+      client.files_upload(i.read(), ("/" + nome_diretorio + "/" + i.filename))
     return json.dumps({'msg': str(len(uploaded_files))+' arquivos foram carregados.'})
 
 @app.route('/<nome_diretorio>/apagar', methods=['DELETE'])
