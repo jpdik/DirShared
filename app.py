@@ -1,8 +1,6 @@
 # coding: utf-8
 
 import os
-if os.path.isfile('.env'):
-    import settings
 
 import json
 import sys
