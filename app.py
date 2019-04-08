@@ -15,7 +15,7 @@ from flask import request
 
 app = Flask(__name__)
 
-PATH_DOWNLOAD = os.getenv('PATH')
+PATH_DOWNLOAD = 'data/'
 
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
