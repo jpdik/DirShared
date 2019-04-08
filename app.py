@@ -1,10 +1,6 @@
 # coding: utf-8
-
-import os
-if os.path.isfile('.env'):
-    import settings
-
 import json
+import os
 import sys
 import requests
 import dropbox
@@ -15,11 +11,13 @@ from flask import request
 
 app = Flask(__name__)
 
-PATH_DOWNLOAD = 'data/'
+TOKEN = 'clRIL4yey9UAAAAAAAAIKOVmPHWzIB0I3rcwhuOtXCft0D1v-WohFKGgN4DofZRA'
+
+PATH_DOWNLOAD = "data/"
 
 NOT_ALLOWED_EXTENSIONS = set(['mp3', 'wma', 'wav', 'm4a', 'mov', 'avi', 'mpg', 'mpeg', 'ogg'])
 
-client = dropbox.Dropbox('clRIL4yey9UAAAAAAAAI6oh21lgtYyQk__aPKawa4zi7FaRiyGumVy_DiihNeh7n') 
+client = dropbox.Dropbox(TOKEN) 
 
 def get_size(fobj):
     if fobj.content_length:
@@ -106,7 +104,7 @@ def uploadArquivo(nome_diretorio):
 
   if file:
     for i in uploaded_files:
-      client.files_upload(i.read(), ("/" + nome_diretorio + "/" + i.filename))
+      response = client.files_upload(i.read(), ("/" + nome_diretorio + "/" + i.filename))
     return json.dumps({'msg': str(len(uploaded_files))+' arquivos foram carregados.'})
 
 @app.route('/<nome_diretorio>/apagar', methods=['DELETE'])
@@ -115,11 +113,6 @@ def apagarArquivos(nome_diretorio):
   for i in info.entries:
     client.files_delete(i.path_display)
   return json.dumps({'msg': str(len(info.entries))+' arquivos foram apagados.'}) 
-
-@app.route('/<nome_diretorio>/apagar/<arquivo>', methods=['DELETE'])
-def apagarArquivo(nome_diretorio, arquivo):
-  client.files_delete('/{}/{}'.format(nome_diretorio, arquivo))
-  return json.dumps({'msg': 'O arquivo "{}" foi apagado.'.format(arquivo)}) 
 
 def checarDiretorio():
   if os.path.isdir(PATH_DOWNLOAD) == False:
@@ -131,7 +124,7 @@ def downloadArquivo(nome_diretorio, nome):
     checarDiretorio()
     try:
       folder = PATH_DOWNLOAD+nome_diretorio+"-"+nome
-      client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
+      f = client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
       with open(folder, 'rb') as arquivo:
         csv = arquivo.read()
       os.remove(folder)
