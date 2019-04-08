@@ -2,7 +2,7 @@
 
 import os
 if os.path.isfile('.env'):
-    import settings
+  import settings
 
 import json
 import sys
