@@ -1,4 +1,4 @@
 gunicorn==18.0
 requests==2.21.0
 Flask==1.0.2
-dropbox==8.9.0
+dropbox==9.3.0
