@@ -153,7 +153,7 @@ def downloadArquivo(nome_diretorio, nome):
           csv,
           mimetype="text/csv",
           headers={"Content-disposition":
-                   "attachment; filename="+nome})
+                   u"attachment; filename="+nome})
     except Exception as err:
       print(err)
       return render_template('erro.html', erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
