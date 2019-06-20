@@ -10,8 +10,6 @@ import requests
 import dropbox
 import logging
 
-from ftfy import fix_encoding
-
 from flask import Flask, Response, render_template, url_for
 from flask import request
 
@@ -154,7 +152,7 @@ def downloadArquivo(nome_diretorio, nome):
           csv,
           mimetype="text/csv",
           headers={"Content-disposition":
-                   "attachment; filename="+fix_encoding(nome)})
+                   "attachment; filename="+nome})
     except Exception as err:
       print(err)
       return render_template('erro.html', erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
