@@ -10,7 +10,9 @@ import requests
 import dropbox
 import logging
 
-from flask import Flask, Response, render_template, url_for, send_file
+import urllib  
+
+from flask import Flask, Response, render_template, url_for
 from flask import request
 
 app = Flask(__name__)
@@ -144,8 +146,15 @@ def downloadArquivo(nome_diretorio, nome):
     checarDiretorio()
     try:
       folder = PATH_DOWNLOAD+nome_diretorio+"-"+nome
-      client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)      
-      return send_file(folder, as_attachment=True)
+      client.files_download_to_file(folder, "/"+nome_diretorio+"/"+nome)
+      with open(folder, 'rb') as arquivo:
+        csv = arquivo.read()
+      os.remove(folder)
+      return Response(
+          csv,
+          mimetype="text/csv",
+          headers={"Content-disposition":
+                   "attachment; filename="+urllib.parse.quote(nome)})
     except Exception as err:
       print(err)
       return render_template('erro.html', erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
