@@ -6,10 +6,11 @@ if os.path.isfile('.env'):
 
 import json
 import sys
-sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 import requests
 import dropbox
 import logging
+
+from ftfy import fix_encoding
 
 from flask import Flask, Response, render_template, url_for
 from flask import request
@@ -153,7 +154,7 @@ def downloadArquivo(nome_diretorio, nome):
           csv,
           mimetype="text/csv",
           headers={"Content-disposition":
-                   u"attachment; filename="+nome})
+                   "attachment; filename="+fix_encoding(nome)})
     except Exception as err:
       print(err)
       return render_template('erro.html', erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
