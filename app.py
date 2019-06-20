@@ -6,6 +6,7 @@ if os.path.isfile('.env'):
 
 import json
 import sys
+sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8', buffering=1)
 import requests
 import dropbox
 import logging
@@ -152,7 +153,7 @@ def downloadArquivo(nome_diretorio, nome):
           csv,
           mimetype="text/csv",
           headers={"Content-disposition":
-                   "attachment; filename="+nome.encode('UTF-8', 'ignore').decode('UTF-8')})
+                   "attachment; filename="+nome})
     except Exception as err:
       print(err)
       return render_template('erro.html', erro='O arquivo foi movido ou removido.',nome=nome_diretorio)
