@@ -26,7 +26,7 @@ class Modal extends Component {
 
     render() {
         return (
-            <MDBContainer>
+            <>
                 <MDBBtn className={this.props.className} gradient={this.props.gradient} onClick={this.toggle}>
                     {this.props.children}
                 </MDBBtn>
@@ -41,7 +41,7 @@ class Modal extends Component {
                         <MDBBtn color="danger" onClick={() => this.handleClick(this.props.key)}>Sim</MDBBtn>
                     </MDBModalFooter>
                 </MDBModal>
-            </MDBContainer >
+            </ >
         );
     }
 }

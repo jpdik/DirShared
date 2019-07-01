@@ -35,3 +35,11 @@ main {
 	top: 0;
 	bottom: 0;
 }
+
+.action{
+	display: block !important;
+}
+
+.Toastify__toast-container {
+	margin-top: 5em;
+}

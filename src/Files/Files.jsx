@@ -222,15 +222,19 @@ class Files extends Component {
                                 </MDBRow>
 
                             </MDBCardBody>
-                            <MDBModalFooter className="mb-1">
-                                <Modal
-                                    className="text-white"
-                                    gradient="peach"
-                                    title={'Apagar todos arquivos'}
-                                    text={'Deseja apagar todos os arquivos?'}
-                                    value=""
-                                    onClick={() => this.handleDeleteClicked(true)}
-                                >Apagar tudo</Modal>
+                            <MDBModalFooter className="action mb-1">
+                                <MDBRow center>
+                                    <MDBCol md="4 text-center">
+                                        <Modal
+                                            className="text-white"
+                                            gradient="peach"
+                                            title={'Apagar todos arquivos'}
+                                            text={'Deseja apagar todos os arquivos?'}
+                                            value=""
+                                            onClick={() => this.handleDeleteClicked(true)}
+                                        >Apagar tudo</Modal>
+                                    </MDBCol>
+                                </MDBRow>
                             </MDBModalFooter>
                         </MDBCard>
                     </MDBCol>
