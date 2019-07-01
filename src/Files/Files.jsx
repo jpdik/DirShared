@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { MDBContainer, Animation, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBIcon, MDBListGroup, MDBListGroupItem, MDBModalFooter } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBIcon, MDBListGroup, MDBListGroupItem, MDBModalFooter } from "mdbreact";
 import axios from 'axios'
-import { Link } from 'react-router-dom';
 
 import { consts } from '../consts'
 import Modal from '../common/Modal/modal';

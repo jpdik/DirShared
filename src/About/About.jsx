@@ -1,5 +1,5 @@
 import React from 'react'
-import { MDBContainer, Animation, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBListGroup, MDBListGroupItem } from "mdbreact";
 import { consts } from '../consts';
 import Logo from '../Logo/Logo';
 
