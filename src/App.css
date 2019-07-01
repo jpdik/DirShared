@@ -1,8 +1,8 @@
 .mt-6 {
-    margin-top: 10%;
+	margin-top: 10%;
 }
 
-#root > .App {
+#root>.App {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -13,16 +13,16 @@ main {
 }
 
 .vertical-align {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .text-center {
-    text-align: center
+	text-align: center
 }
 
 .div-center {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .icon {
@@ -36,10 +36,22 @@ main {
 	bottom: 0;
 }
 
-.action{
+.action {
 	display: block !important;
 }
 
 .Toastify__toast-container {
 	margin-top: 5em;
+}
+
+@media only screen and (max-width: 600px) {
+	.logo {
+		width: 250px;
+	}
+}
+
+@media (min-width: 601px) and (max-width: 991px) {
+	.logo {
+		width: 250px;
+	}
 }

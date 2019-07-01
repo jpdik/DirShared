@@ -1,17 +1,15 @@
 import React from 'react'
 import { MDBContainer, Animation, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import { Link } from 'react-router-dom';
 import { consts } from '../consts';
+import Logo from '../Logo/Logo';
 
 export default props => (
     <MDBContainer>
         <MDBRow center className="mt-6">
-            <MDBCol md="4">
-                <Link to="/">
-                    <Animation className="text-center" type="rubberBand" duration="1s">
-                        <img src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png" alt="Transparent MDB Logo" />
-                    </Animation>
-                </Link>
+            <MDBCol md="12">
+                <MDBCol md="12">
+                    <Logo className="text-center"/>
+                </MDBCol>
             </MDBCol>
         </MDBRow>
         <MDBRow>
@@ -30,13 +28,13 @@ export default props => (
                                     Com este simples sistema é possível você compartilhar alguns arquivos de forma rápida e prática.
                                 </p>
                                 <hr className="my-2" />
-                                    <MDBListGroup className="mt-5">
-                                        <MDBListGroupItem active>Compartilhe qualquer de arquivo até <b>{consts.MAX_MB} MB</b> de tamanho.</MDBListGroupItem>
-                                        <MDBListGroupItem hover>Pode enviar até 15 arquivos por diretório.</MDBListGroupItem>
-                                        <MDBListGroupItem hover>Não são permitidos <b>{consts.NOT_PERMITED_FILES.map(file => { return `.${file} `})}</b>.</MDBListGroupItem>
-                                        <MDBListGroupItem hover>Você não precisa fazer login!</MDBListGroupItem>
-                                        <MDBListGroupItem hover>Criado por <a href="https://www.jpmdik.com.br">João Paulo de Melo</a>.</MDBListGroupItem>
-                                    </MDBListGroup>
+                                <MDBListGroup className="mt-5">
+                                    <MDBListGroupItem active>Compartilhe qualquer de arquivo até <b>{consts.MAX_MB} MB</b> de tamanho.</MDBListGroupItem>
+                                    <MDBListGroupItem hover>Pode enviar até 15 arquivos por diretório.</MDBListGroupItem>
+                                    <MDBListGroupItem hover>Não são permitidos <b>{consts.NOT_PERMITED_FILES.map(file => { return `.${file} ` })}</b>.</MDBListGroupItem>
+                                    <MDBListGroupItem hover>Você não precisa fazer login!</MDBListGroupItem>
+                                    <MDBListGroupItem hover>Criado por <a href="https://www.jpmdik.com.br">João Paulo de Melo</a>.</MDBListGroupItem>
+                                </MDBListGroup>
                             </MDBCol>
                         </MDBRow>
                     </MDBCardBody>

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { consts } from '../consts'
 import Modal from '../common/Modal/modal';
+import Logo from '../Logo/Logo';
 
 class Files extends Component {
     constructor(props) {
@@ -167,11 +168,7 @@ class Files extends Component {
                 />
                 <MDBRow center className="mt-5">
                     <MDBCol md="12">
-                        <Link to="/">
-                            <Animation type="rubberBand" duration="1s">
-                                <img src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png" alt="Transparent MDB Logo" />
-                            </Animation>
-                        </Link>
+                        <Logo />
                     </MDBCol>
                 </MDBRow>
                 <MDBRow>

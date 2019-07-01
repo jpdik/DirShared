@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { MDBContainer, Animation, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBModalFooter } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBModalFooter } from "mdbreact";
 import './Homepage.css'
 import { Link } from 'react-router-dom';
+import Logo from '../Logo/Logo'
 
 class Homepage extends Component {
     constructor(props) {
@@ -40,12 +41,8 @@ class Homepage extends Component {
         return (
             <MDBContainer>
                 <MDBRow center className="mt-6">
-                    <MDBCol md="4">
-                        <Link to="/">
-                            <Animation className="text-center" type="rubberBand" duration="1s">
-                                <img src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png" alt="Transparent MDB Logo" />
-                            </Animation>
-                        </Link>
+                    <MDBCol md="12">
+                        <Logo className="text-center"/>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow>
