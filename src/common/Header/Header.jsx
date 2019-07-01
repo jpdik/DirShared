@@ -3,6 +3,7 @@ import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 
 class Header extends Component {
+
     state = {
         isOpen: false
     };
@@ -12,6 +13,7 @@ class Header extends Component {
     }
 
     render() {
+        console.log(window.location.pathname);
         return (
             <MDBNavbar color="primary-color" dark expand="md">
                 <MDBNavbarBrand>
@@ -20,7 +22,7 @@ class Header extends Component {
                 <MDBNavbarToggler onClick={this.toggleCollapse} />
                 <MDBCollapse id="navbarCollapse" isOpen={this.state.isOpen} navbar>
                     <MDBNavbarNav left>
-                        <MDBNavItem active>
+                        <MDBNavItem>
                             <MDBNavLink to="/">Home</MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
