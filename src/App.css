@@ -55,3 +55,7 @@ main {
 		width: 250px;
 	}
 }
+
+.custom-file-label {
+	z-index: 0 !important;
+}
