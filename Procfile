@@ -1,1 +1,1 @@
-web: ./node_modules/serve/bin/serve.js -l $PORT
+web: ./node_modules/serve/bin/serve.js -l $PORT -s build
