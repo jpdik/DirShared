@@ -2,7 +2,7 @@ import React from 'react'
 import { Animation } from "mdbreact";
 import { Link } from 'react-router-dom';
 
-import logo from '../img/logo.png'
+import logo from '../../assets/logo.png'
 
 export default props => (
     <Link to="/">

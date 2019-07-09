@@ -4,9 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBIcon, MDBListGroup, MDBListGroupItem, MDBModalFooter } from "mdbreact";
 import axios from 'axios'
 
-import { consts } from '../consts'
-import Modal from '../common/Modal/modal';
-import Logo from '../Logo/Logo';
+import { consts } from '../../consts'
+import Modal from '../../components/Modal/modal';
+import Logo from '../../components/Logo/Logo';
+import DonateButton from '../../components/DonateButton/DonateButton';
 
 class Files extends Component {
     constructor(props) {
@@ -231,6 +232,9 @@ class Files extends Component {
                                         >Apagar tudo</Modal>
                                     </MDBCol>
                                 </MDBRow>
+                            </MDBModalFooter>
+                            <MDBModalFooter className="mx-5 pt-3 mb-1">
+                                <DonateButton />
                             </MDBModalFooter>
                         </MDBCard>
                     </MDBCol>

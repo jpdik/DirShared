@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBModalFooter } from "mdbreact";
 import './Homepage.css'
 import { Link } from 'react-router-dom';
-import Logo from '../Logo/Logo'
+import Logo from '../../components/Logo/Logo'
+import DonateButton from '../../components/DonateButton/DonateButton'
 
 class Homepage extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class Homepage extends Component {
             <MDBContainer>
                 <MDBRow center className="mt-6">
                     <MDBCol md="12">
-                        <Logo className="text-center"/>
+                        <Logo className="text-center" />
                     </MDBCol>
                 </MDBRow>
                 <MDBRow>
@@ -87,7 +88,7 @@ class Homepage extends Component {
                                 </MDBRow>
                             </MDBCardBody>
                             <MDBModalFooter className="mx-5 pt-3 mb-1">
-
+                                <DonateButton />
                             </MDBModalFooter>
                         </MDBCard>
                     </MDBCol>

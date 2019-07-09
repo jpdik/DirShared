@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Header from './common/Header/Header';
-import Footer from './common/Footer/Footer';
-import Homepage from './Homepage/Homepage';
-import About from './About/About';
-import Files from './Files/Files';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Homepage from './pages/Homepage/Homepage';
+import About from './pages/About/About';
+import Files from './pages/Files/Files';
 
 function App() {
   return (

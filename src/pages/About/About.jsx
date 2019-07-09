@@ -1,7 +1,8 @@
 import React from 'react'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import { consts } from '../consts';
-import Logo from '../Logo/Logo';
+import { consts } from '../../consts';
+import Logo from '../../components/Logo/Logo';
+import DonateButton from '../../components/DonateButton/DonateButton';
 
 export default props => (
     <MDBContainer>
@@ -39,7 +40,7 @@ export default props => (
                         </MDBRow>
                     </MDBCardBody>
                     <MDBModalFooter className="mx-5 pt-3 mb-1">
-
+                        <DonateButton />
                     </MDBModalFooter>
                 </MDBCard>
             </MDBCol>
