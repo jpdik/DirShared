@@ -13,7 +13,6 @@ class Header extends Component {
     }
 
     render() {
-        console.log(window.location.pathname);
         return (
             <MDBNavbar color="primary-color" dark expand="md">
                 <MDBNavbarBrand>
