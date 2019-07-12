@@ -30,7 +30,7 @@ export default props => (
                                 </p>
                                 <hr className="my-2" />
                                 <MDBListGroup className="mt-5">
-                                    <MDBListGroupItem active>Compartilhe qualquer de arquivo até <b>{consts.MAX_MB} MB</b> de tamanho.</MDBListGroupItem>
+                                    <MDBListGroupItem active>Compartilhe qualquer arquivo com até <b>{consts.MAX_MB} MB</b> de tamanho.</MDBListGroupItem>
                                     <MDBListGroupItem hover>Pode enviar até 15 arquivos por diretório.</MDBListGroupItem>
                                     <MDBListGroupItem hover>Não são permitidos <b>{consts.NOT_PERMITED_FILES.map(file => { return `.${file} ` })}</b>.</MDBListGroupItem>
                                     <MDBListGroupItem hover>Você não precisa fazer login!</MDBListGroupItem>
