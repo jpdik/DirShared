@@ -19,14 +19,14 @@ export default props => (
                     <MDBCardBody className="mx-4">
                         <div className="text-center">
                             <h3 className="dark-grey-text mb-5">
-                                <strong>Nao logue, use somente uma URL</strong>
+                                <strong>Não logue, somente use uma URL</strong>
                                 <div className="text-center mt-1">Compartilhe arquivos diretamente</div>
                             </h3>
                         </div>
                         <MDBRow>
                             <MDBCol>
                                 <p className="lead">
-                                    Com este simples sistema é possível você compartilhar alguns arquivos de forma rápida e prática.
+                                    Aqui é possível você compartilhar pequenos arquivos usando um link direto.
                                 </p>
                                 <hr className="my-2" />
                                 <MDBListGroup className="mt-5">
