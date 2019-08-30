@@ -4,7 +4,7 @@
             "delegate_permission/common.handle_all_urls"
         ],
         "target": {
-            "namespace": "web",
+            "namespace": "android_app",
             "package_name": "com.jpmdik.dirshared",
             "sha256_cert_fingerprints": [
                 "10:00:D3:C0:AB:D3:A9:E6:25:CE:39:E1:D9:23:24:DF:6B:FC:70:BC:44:C8:4E:09:F4:14:E5:4C:AB:37:70:73"
