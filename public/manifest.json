@@ -1,0 +1,18 @@
+{
+    "name": "DirShared",
+    "short_name": "DirShared",
+    "theme_color": "#4285f4",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "lang": "pt-BR",
+    "orientation": "any",
+    "icons": [
+      {
+        "src": "%PUBLIC_URL%/logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
