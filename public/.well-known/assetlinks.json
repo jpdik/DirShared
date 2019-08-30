@@ -2,7 +2,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.ajonp.app",
+      "package_name": "com.jpmdik.dirshared",
       "sha256_cert_fingerprints": [
         "06:08:2E:3A:4B:48:0C:4D:84:BC:56:69:62:08:19:6E:A4:E3:03:88:B2:12:30:CA:50:13:D5:AA:28:D9:66:83"
       ]
