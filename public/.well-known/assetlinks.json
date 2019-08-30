@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.jpmdik.dirshared",
+            "sha256_cert_fingerprints": [
+                "E1:09:73:A1:CC:45:54:06:0B:CF:D7:34:29:23:DF:54:AB:FC:03:40:2B:A5:B5:74:0B:38:63:B7:05:92:1A:E7"
+            ]
+        }
+    }
+]
