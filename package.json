@@ -66,7 +66,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && node ./src/sw-build.js && rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -133,5 +133,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "workbox-build": "^4.3.1"
   }
 }
