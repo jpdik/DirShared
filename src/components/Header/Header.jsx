@@ -18,7 +18,7 @@ class Header extends Component {
                 <MDBNavbarBrand>
                     <strong className="white-text bold">DirShared</strong>
                 </MDBNavbarBrand>
-                <MDBNavbarToggler onClick={this.toggleCollapse} />
+                <MDBNavbarToggler onClick={this.toggleCollapse}><span className="align-middle mr-1">Menu</span><span className="navbar-toggler-icon"></span></MDBNavbarToggler>
                 <MDBCollapse id="navbarCollapse" isOpen={this.state.isOpen} navbar>
                     <MDBNavbarNav left>
                         <MDBNavItem>
