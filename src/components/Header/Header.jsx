@@ -16,7 +16,7 @@ class Header extends Component {
         return (
             <MDBNavbar color="primary-color" dark expand="md">
                 <MDBNavbarBrand>
-                    <strong className="white-text">DirShared</strong>
+                    <strong className="white-text bold">DirShared</strong>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler onClick={this.toggleCollapse} />
                 <MDBCollapse id="navbarCollapse" isOpen={this.state.isOpen} navbar>
