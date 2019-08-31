@@ -9,7 +9,7 @@ import Files from './pages/Files/Files';
 
 function App() {
   return (
-    <>
+    <div className="App">
         <main>
           <Header />
 
@@ -20,7 +20,7 @@ function App() {
           </Switch>
         </main>
         <Footer />
-    </>
+    </div>
   );
 }
 
