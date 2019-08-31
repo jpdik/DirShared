@@ -1,0 +1,5 @@
+# www.dirshared.com.br/
+
+# Allow crawling of all content
+User-agent: *
+Disallow: /.well-known/assetlinks.json
