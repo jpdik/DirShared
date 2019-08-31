@@ -9,7 +9,7 @@ const buildSW = () => {
     swDest: 'build/sw.js', // this will be created in the build step
     globDirectory: 'build',
     globPatterns: [
-      '**\/*.{js,css,html,png,json,svg,ico}',
+      '**\/*.{js,css,html,png,json,svg,ico,woff,woff2,ttf}',
     ]
   }).then(({count, size, warnings}) => {
     // Optionally, log any warnings and details.
