@@ -42,9 +42,7 @@ class Homepage extends Component {
         return (
             <MDBContainer>
                 <MDBRow center className="mt-6">
-                    <MDBCol md="12">
-                        <Logo className="text-center" />
-                    </MDBCol>
+                    <Logo className="text-center" />
                 </MDBRow>
                 <MDBRow>
                     <MDBCol md="12">
