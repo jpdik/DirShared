@@ -58,6 +58,7 @@ class Homepage extends Component {
                                     <MDBCol md="5">
                                         <MDBInput
                                             group
+                                            name="url"
                                             value={window.location}
                                             disabled
                                         />
@@ -66,6 +67,7 @@ class Homepage extends Component {
                                         <MDBInput
                                             label="Ir para local..."
                                             group
+                                            name="directory"
                                             type="text"
                                             containerClass="mb-0"
                                             onChange={this.handleChange}
